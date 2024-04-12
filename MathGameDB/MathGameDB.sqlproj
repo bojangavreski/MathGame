@@ -160,5 +160,9 @@
     <Build Include="dbo\Tables\MathExpression.sql" />
     <Build Include="dbo\Tables\GameSession.sql" />
     <Build Include="dbo\Tables\UserInGameSession.sql" />
+    <Build Include="dbo\Tables\UserMathExpression.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="MathGameDB.refactorlog" />
   </ItemGroup>
 </Project>

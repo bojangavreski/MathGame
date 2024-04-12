@@ -7,15 +7,12 @@ using MathGame.Infrastructure.Context.Interface;
 using MathGame.Infrastructure.Context.Interface.Repositories;
 using MathGame.Infrastructure.Repositories;
 using MathGame.Infrastructure.Repositories.Interface;
+using MathGame.Infrastructure.Repositories.UserMathExpressionRepository;
 using MathGame.Services.Interface.Services;
 using MathGame.Services.Services;
 using MathGame.Services.Services.GameService;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.Text;
 
 namespace MathGame;
 public class Program
@@ -64,6 +61,7 @@ public class Program
         builder.Services.AddScoped<IMathExpressionRepository, MathExpressionRepository>();
         builder.Services.AddScoped<IGameSessionRepository, GameSessionRepository>();
         builder.Services.AddScoped<IUserInGameSessionRepository, UserInGameSessionRepository>();
+        builder.Services.AddScoped<IUserMathExpressionRepository, UserMathExpressionRepository>();
 
         //Services
         builder.Services.AddSingleton<SemaphoreSlim>(new SemaphoreSlim(1, 1));

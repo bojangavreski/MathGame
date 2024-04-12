@@ -7,6 +7,8 @@ public interface IUserInGameSessionService
 
     Task InsertCurrentUserInGameSession(GameSession gameSession);
 
+    Task<int> GetCurrentUserId();
+
     void EnqueueCurrentUser(int gameSessionId, out int? positionInQueue);
 
     Task IncreaseCurrentUserScore();

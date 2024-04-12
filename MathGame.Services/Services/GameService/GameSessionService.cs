@@ -29,13 +29,11 @@ public class GameSessionService : IGameSessionService
 
 
     public async Task<GameSessionResponse> JoinGameSession()
-    {
+    { 
         GameSession gameSession = await GetGameSession();
-        GameSessionResponse gameSessionResponse = CreateGameSessionResponse(gameSession.Uid);
-
-        //TODO: throw exception if user already in game session
         IEnumerable<UserInGameSession> usersInGameSession = gameSession.UsersInGameSession.Where(x => x.DeletedOn == null);
 
+        int? positionInQueue = null;
         if(usersInGameSession.Count() < 5)
         {
             await _userInGameSessionService.InsertCurrentUserInGameSession(gameSession);
@@ -44,19 +42,35 @@ public class GameSessionService : IGameSessionService
             {
                 await StartGameSession(gameSession);
             }
-
-            //TODO: Provide unanswered expression to the newly joined player
+            else
+            {
+                 //Send un-answered expression to newly joined player 
+                 MathExpression activeMathExpression = gameSession.MathExpressions.Where(x => x.DeletedOn == null).FirstOrDefault();
+                 if(activeMathExpression != null) 
+                 {
+                    await _mathGameHubService.SendMathExpressionInGameSessionGroup(gameSession.Uid.ToString(), CreateMathExpressionResponse(activeMathExpression));
+                 }
+            }
         }
         else
         {
-            _userInGameSessionService.EnqueueCurrentUser(gameSession.Id, out int? positionInQueue);
-            gameSessionResponse.PositionInQueue = positionInQueue;
+            _userInGameSessionService.EnqueueCurrentUser(gameSession.Id, out positionInQueue);
         }
 
         await _gameSessionRepository.SaveAsync();
-        return gameSessionResponse;
+        return CreateGameSessionResponse(gameSession.Uid, positionInQueue, default, gameSession.UsersInGameSession.Count());
     }
 
+
+    private MathExpressionResponse CreateMathExpressionResponse(MathExpression mathExpression)
+    {
+        return new MathExpressionResponse
+        {
+            MathExpressionDisplay = $"{mathExpression.DisplayedExpression}={mathExpression.DisplayedResult}",
+            ExpressionUid = mathExpression.Uid,
+            QuestionType = mathExpression.QuestionType
+        };
+    }
 
 
     private async Task StartGameSession(GameSession gameSession)
@@ -89,11 +103,17 @@ public class GameSessionService : IGameSessionService
         };
     }
 
-    private GameSessionResponse CreateGameSessionResponse(Guid gameSessionUid, int? positionInQueue = null)
+    private GameSessionResponse CreateGameSessionResponse(Guid gameSessionUid,
+                                                          int? positionInQueue,
+                                                          int currentUserScore,
+                                                          int activePlayersInGame)
     {
         return new GameSessionResponse
         {
-            Uid = gameSessionUid
+            Uid = gameSessionUid,
+            PositionInQueue = positionInQueue,
+            CurrentUserScore = currentUserScore,
+            ActivePlayersInGame = activePlayersInGame
         };
     }
 }

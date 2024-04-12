@@ -1,4 +1,6 @@
-﻿namespace MathGame.Core.Entities.UserInSession;
+﻿using System.Collections.ObjectModel;
+
+namespace MathGame.Core.Entities.UserInSession;
 
 public class UserInGameSession : TrackedTable
 {
@@ -9,4 +11,8 @@ public class UserInGameSession : TrackedTable
     public int GameSessionFk { get; set; }
 
     public virtual GameSession GameSession { get; set; }
+
+    public virtual ICollection<MathExpression> MathExpressions { get; set; }
+
+    public virtual ICollection<UserMathExpression> UserMathExpressions { get; set; }
 }

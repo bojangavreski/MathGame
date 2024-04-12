@@ -5,7 +5,6 @@ using MathGame.Core.Entities.UserInSession;
 using MathGame.Infrastructure.Context.Interface.Repositories;
 using MathGame.Models.Models.UserInGameSession;
 using MathGame.Services.Interface.Services;
-using Microsoft.AspNetCore.SignalR;
 
 namespace MathGame.Services.Services;
 public class UserInGameSessionService : IUserInGameSessionService
@@ -38,7 +37,7 @@ public class UserInGameSessionService : IUserInGameSessionService
 
         if(gameSession.UsersInGameSession.Any(x => x.UserFk == user.Id))
         {
-            throw new Exception("User already in game session");
+            return;
         }
 
         UserInGameSession userInGameSession = new UserInGameSession
@@ -84,6 +83,20 @@ public class UserInGameSessionService : IUserInGameSessionService
     {
         UserInGameSession userInGameSesion =  await _userInGameSessionRepository.GetUserInGameSessionByEmail(_userService.GetCurrentUserEmail());
         userInGameSesion.Score += 1;
+    }
+
+    public async Task<int> GetCurrentUserId()
+    {
+        string currentUserEmail = _userService.GetCurrentUserEmail();
+        UserInGameSession currentUserInGameSession = await _userInGameSessionRepository.GetUserInGameSessionByEmail(currentUserEmail);
+        if(currentUserInGameSession != null)
+        {
+            return currentUserInGameSession.Id;
+        }
+        else
+        {
+            throw new Exception($"UserInGameSession {currentUserEmail} not found");
+        }
     }
 
     private EnqueuedUser CreateEnquedUser()

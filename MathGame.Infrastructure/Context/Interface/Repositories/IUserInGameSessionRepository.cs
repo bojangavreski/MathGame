@@ -10,6 +10,8 @@ public interface IUserInGameSessionRepository
 
     Task<UserInGameSession> GetUserInGameSessionByEmail(string email);
 
+    Task<IEnumerable<Guid>> GetUsersInGameSessionUids(Guid gameSessionUid);
+
     void Insert(UserInGameSession entity);
 
     Task SaveAsync();

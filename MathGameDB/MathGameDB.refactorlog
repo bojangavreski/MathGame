@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="ef9ca27a-fe68-423f-a98b-c0691af23e24" ChangeDateTime="04/12/2024 14:16:19">
+    <Property Name="ElementName" Value="[dbo].[UserMathExpressionAnswer].[MathExpression]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserMathExpressionAnswer]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MathExpressionFk" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2c1c5b62-4cdb-4e1f-8712-f928f742680b" ChangeDateTime="04/12/2024 14:17:08">
+    <Property Name="ElementName" Value="[dbo].[UserMathExpressionAnswer].[C]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserMathExpressionAnswer]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Createdon" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6427598e-4ea7-43c8-abe3-45104c846708" ChangeDateTime="04/12/2024 14:17:12">
+    <Property Name="ElementName" Value="[dbo].[UserMathExpressionAnswer].[Createdon]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserMathExpressionAnswer]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreatedOn" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f9faf832-9a3d-4450-9102-786d56e27d3d" ChangeDateTime="04/12/2024 14:17:17">
+    <Property Name="ElementName" Value="[dbo].[UserMathExpressionAnswer].[D]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserMathExpressionAnswer]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DeletedOn" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0357b011-88bf-4228-ac07-acefd0bbd4cf" ChangeDateTime="04/12/2024 14:22:22">
+    <Property Name="ElementName" Value="[dbo].[UserMathExpressionAnswer].[UserFk]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserMathExpressionAnswer]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserInSessionFk" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7f3b5280-b678-4fb6-8ee9-64d16987586a" ChangeDateTime="04/12/2024 14:22:45">
+    <Property Name="ElementName" Value="[dbo].[UserMathExpressionAnswer].[UserInSessionFk]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserMathExpressionAnswer]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserInGameSessionFk" />
+  </Operation>
+</Operations>

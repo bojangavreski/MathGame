@@ -20,6 +20,21 @@ public class Repository<T> where T : TrackedTable
         return _dbSet.Where(x => x.DeletedOn == null).AsQueryable();
     }
 
+    public IQueryable<T> AllNoTrackedOf()
+    {
+        return _dbSet.Where(x => x.DeletedOn == null).AsNoTracking().AsQueryable();
+    }
+
+    public IQueryable<F>  All<F>() where F : TrackedTable
+    {
+        return _mathGameContext.Set<F>().Where(x => x.DeletedOn == null).AsQueryable();
+    }
+
+    public IQueryable<F> AllNoTrackedOf<F>() where F : TrackedTable
+    {
+        return _mathGameContext.Set<F>().AsNoTracking().Where(x => x.DeletedOn == null).AsQueryable();
+    }
+
     public async Task<T> Find(int id)
     {
         return await _dbSet.Where(x => x.DeletedOn == null && x.Id == id).SingleOrDefaultAsync();

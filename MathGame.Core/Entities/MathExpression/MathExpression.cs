@@ -1,4 +1,5 @@
-﻿using MathGame.Core.Enums;
+﻿using MathGame.Core.Entities.UserInSession;
+using MathGame.Core.Enums;
 
 namespace MathGame.Core.Entities;
 public class MathExpression : TrackedTable
@@ -14,4 +15,8 @@ public class MathExpression : TrackedTable
     public int GameSessionFk { get; set; }
 
     public virtual GameSession GameSession {  get; set; } 
+
+    public virtual ICollection<UserInGameSession> UsersInGameSession { get; set; }
+
+    public virtual ICollection<UserMathExpression> UserMathExpressions { get; set; }
 }

@@ -29,6 +29,7 @@ public class MathGameContext : IdentityDbContext<User>, IMathGameContext
         builder.Entity<MathExpression>().ToTable("MathExpression");
         builder.Entity<UserInGameSession>().ToTable("UserInGameSession");
         builder.Entity<User>().ToTable("AspNetUsers");
+        builder.Entity<UserMathExpression>().ToTable("UserMathExpression");
 
         builder.Entity<UserInGameSession>().HasOne(x => x.GameSession)
                                            .WithMany(x => x.UsersInGameSession)
@@ -37,6 +38,14 @@ public class MathGameContext : IdentityDbContext<User>, IMathGameContext
         builder.Entity<MathExpression>().HasOne(x => x.GameSession)
                                         .WithMany(x => x.MathExpressions)
                                         .HasForeignKey(x => x.GameSessionFk);
+
+        builder.Entity<UserMathExpression>().HasOne(x => x.MathExpression)
+                                           .WithMany(x => x.UserMathExpressions)
+                                           .HasForeignKey(x => x.MathExpressionFk);
+
+        builder.Entity<UserMathExpression>().HasOne(x => x.UserInGameSession)
+                                           .WithMany(x => x.UserMathExpressions)
+                                           .HasForeignKey(x => x.UserInGameSessionFk);
 
         builder.ApplyConfiguration(new GameSessionConfiguration());
 
