@@ -38,7 +38,7 @@ public class GameSessionService : IGameSessionService
         {
             await _userInGameSessionService.InsertCurrentUserInGameSession(gameSession);
             
-            if(usersInGameSession.Count() == 1)
+            if(usersInGameSession.Count() == 1 && !gameSession.MathExpressions.Any(x => x.DeletedOn == null))
             {
                 await StartGameSession(gameSession);
             }
