@@ -47,8 +47,6 @@ public class Program
         //Authorization 
         builder.Services.AddAuthorizationBuilder();
 
-        //builder.Services.AddTransient<ClaimsPrincipal>(x => x.GetService<IHttpContextAccessor>().HttpContext.User);
-
         var connectionString = "Data Source=localhost;Initial Catalog=MathGameDB;Integrated Security=True;Connect Timeout=60;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
 
