@@ -1,0 +1,34 @@
+
+<div class="container mt-5">
+  <div class="">
+    <h2>Current score: {{userScore}}</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#Id</th>
+        <th scope="col">Expression</th>
+        <th scope="col">Your Answer</th>
+        <th scope="col">Result</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let expression of expressions; let i = index">
+      <tr *ngIf="expression.result !== undefined">
+        <th scope="row">{{i+1}}</th>
+        <td>{{expression.mathExpression}}</td>
+        <td *ngIf="expression.answer === undefined">MISSED</td>
+        <td *ngIf="expression.answer !== undefined">{{expression.answer ? "YES" : "NO"}}</td>
+        <td>{{expression.result === 1 ? "OK" : "FAILED"}}</td>
+      </tr>
+      <tr *ngIf="expression.result === undefined">
+        <th scope="row">{{i+1}}</th>
+        <td>{{expression.mathExpression}}</td>
+        <td>
+          <button type="submit" class="btn btn-primary" (click)="answerExpression(expression.uid, true)">Yes</button>
+          <button type="submit" class="btn btn-secondary m-3" (click)="answerExpression(expression.uid, false)">No</button>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
