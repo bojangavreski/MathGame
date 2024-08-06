@@ -1,9 +1,5 @@
-using MathGame.API.Hubs.Services;
 using MathGame.Core.Interfaces.Services;
-using MathGame.Models.Models.GameSession;
 using MathGame.Models.Models.MathExpression;
-using MathGame.Services.Interface.Services;
-using MathGame.Services.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
